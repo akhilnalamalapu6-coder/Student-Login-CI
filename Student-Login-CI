@@ -1,0 +1,43 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building Student Login System'
+            }
+        }
+
+        stage('Test Login') {
+            steps {
+                script {
+                    def username = 'student'
+                    def password = '1234'
+
+                    if (username == 'student' &&
+                        password == '1234') {
+                        echo 'Login Test Passed'
+                    } else {
+                        error 'Login Test Failed'
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Student Login System is ready'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'CI Pipeline completed successfully!'
+        }
+        failure {
+            echo 'CI Pipeline failed!'
+        }
+    }
+}
